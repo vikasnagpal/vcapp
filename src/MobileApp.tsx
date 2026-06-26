@@ -16,7 +16,7 @@ export default function MobileApp() {
         overscrollBehavior: 'none',
       }}
     >
-      <VCApp />
+      <VCApp chromeless />
     </div>
   )
 }

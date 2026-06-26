@@ -16,10 +16,14 @@ import Toast from './overlays/Toast'
 const ROOT =
   "position:relative;height:100%;display:flex;flex-direction:column;overflow:hidden;background:#FBFBFD;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#18181B;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-variant-numeric:tabular-nums;"
 
-export default function VCApp() {
+export default function VCApp({ chromeless = false }: { chromeless?: boolean }) {
   const [state, dispatch] = useReducer(reducer, initialState)
   const actions = useMemo(() => buildActions(dispatch), [])
   const vals = deriveVals(state, actions)
+
+  // Framed build needs 80px to clear the simulated iOS status bar / island.
+  // The full-screen mobile build only needs the device safe-area + a little gap.
+  const padTop = chromeless ? 'calc(env(safe-area-inset-top, 0px) + 16px)' : '80px'
 
   // Auto-dismiss transient overlays (mirrors the design's _toast / _celebrate timers).
   useEffect(() => {
@@ -37,11 +41,11 @@ export default function VCApp() {
   return (
     <div style={{ ...css(ROOT), ...THEME_VARS }}>
       <div className="vcScroll" style={css('flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;')}>
-        <div style={css('padding:80px 18px 16px;')}>
+        <div style={css(`padding:${padTop} 18px 16px;`)}>
           {vals.tabHome && <HomeScreen vals={vals} actions={actions} />}
           {vals.tabSocial && <SocialScreen vals={vals} actions={actions} />}
           {vals.tabLeaderboard && <LeaderboardScreen vals={vals} actions={actions} />}
-          {vals.tabProfile && <ProfileScreen vals={vals} actions={actions} />}
+          {vals.tabProfile && <ProfileScreen vals={vals} actions={actions} padTop={padTop} />}
         </div>
       </div>
 

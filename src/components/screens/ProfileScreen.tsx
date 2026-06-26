@@ -3,12 +3,12 @@ import type { Vals } from '../../vc/derive'
 import type { Actions } from '../../vc/actions'
 import { Camera, ChevronLeft, ContactUser, WhatsApp } from '../Icons'
 
-export default function ProfileScreen({ vals, actions }: { vals: Vals; actions: Actions }) {
+export default function ProfileScreen({ vals, actions, padTop = '80px' }: { vals: Vals; actions: Actions; padTop?: string }) {
   const p = vals.profile
   return (
     <div>
-      {/* cover + avatar (bleeds past the app's 80/18px padding) */}
-      <div style={css('position:relative;margin:-80px -18px 0;')}>
+      {/* cover + avatar (bleeds back up past the content top padding + side padding) */}
+      <div style={css(`position:relative;margin:calc(-1 * (${padTop})) -18px 0;`)}>
         <div style={css('height:172px;overflow:hidden;background:#E9E8EE;')}>
           <img src={`${import.meta.env.BASE_URL}assets/property.jpg`} alt="" style={css('width:100%;height:172px;display:block;object-fit:cover;')} />
         </div>
