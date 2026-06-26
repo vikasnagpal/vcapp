@@ -1,0 +1,35 @@
+/* ── Global reset + design keyframes (ported verbatim from VC Interface.dc.html) ── */
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* hide scrollbars on the scrollable surfaces */
+.vcScroll::-webkit-scrollbar { display: none; }
+
+@keyframes vcSheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes vcFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes vcChipIn { from { transform: translate(-50%, 14px); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+@keyframes vcSpin { to { transform: rotate(360deg); } }
+@keyframes vcPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.07); } }
+@keyframes vcBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes vcDrop { 0% { transform: translateY(-2px); opacity: 0; } 30% { opacity: .9; } 100% { transform: translateY(12px); opacity: 0; } }
+@keyframes vcRing { from { transform: scale(.5); opacity: .7; } to { transform: scale(1.9); opacity: 0; } }
+@keyframes vcStampIn { 0% { opacity: 0; transform: scale(1.6) rotate(-20deg); } 55% { opacity: 1; transform: scale(.93) rotate(-6deg); } 100% { opacity: 1; transform: scale(1) rotate(-8deg); } }
+@keyframes vcIconPop { 0% { transform: scale(1); } 45% { transform: scale(1.16); } 100% { transform: scale(1); } }
+@keyframes vcThrob { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+@keyframes vcDrift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(8px); } }
+
+/* press feedback on any tappable element (design carried this on [style*="cursor:pointer"]) */
+[style*="cursor:pointer"] {
+  transition: transform .14s cubic-bezier(.2, .8, .3, 1), box-shadow .22s ease, background .2s ease, color .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+[style*="cursor:pointer"]:active { transform: scale(.972); }
+
+/* keep textarea/input inheriting the app font */
+input, textarea, button { font-family: inherit; }

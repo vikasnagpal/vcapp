@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-ssr
+*.local
+*.tsbuildinfo
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+
+# design source reference images (not part of the app build)
+References/
