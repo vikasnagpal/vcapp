@@ -24,12 +24,24 @@ body {
 @keyframes vcThrob { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
 @keyframes vcDrift { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(8px); } }
 
-/* press feedback on any tappable element (design carried this on [style*="cursor:pointer"]) */
-[style*="cursor:pointer"] {
-  transition: transform .14s cubic-bezier(.2, .8, .3, 1), box-shadow .22s ease, background .2s ease, color .2s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-[style*="cursor:pointer"]:active { transform: scale(.972); }
+/* kill the mobile tap-highlight flash everywhere */
+* { -webkit-tap-highlight-color: transparent; }
 
-/* keep textarea/input inheriting the app font */
+/* press feedback on any tappable element.
+   Browsers serialize the inline style attribute with a space ("cursor: pointer"),
+   so match both spellings to be safe. */
+[style*="cursor:pointer"],
+[style*="cursor: pointer"] {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  transition: transform .14s cubic-bezier(.2, .8, .3, 1), box-shadow .22s ease, background .2s ease, color .2s ease;
+}
+[style*="cursor:pointer"]:active,
+[style*="cursor: pointer"]:active { transform: scale(.972); }
+
+/* keep textarea/input inheriting the app font + allow text selection there */
 input, textarea, button { font-family: inherit; }
+input, textarea { user-select: text; -webkit-user-select: text; }
