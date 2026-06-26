@@ -6,4 +6,14 @@ export default defineConfig({
   // Served from https://vikasnagpal.github.io/vcapp/ (GitHub Pages project site)
   base: '/vcapp/',
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      input: {
+        // framed (iPhone bezel) build → /vcapp/
+        main: 'index.html',
+        // frame-less, full-bleed mobile build → /vcapp/mobile/
+        mobile: 'mobile/index.html',
+      },
+    },
+  },
 })

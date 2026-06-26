@@ -10,7 +10,7 @@ export default function ProfileScreen({ vals, actions }: { vals: Vals; actions: 
       {/* cover + avatar (bleeds past the app's 80/18px padding) */}
       <div style={css('position:relative;margin:-80px -18px 0;')}>
         <div style={css('height:172px;overflow:hidden;background:#E9E8EE;')}>
-          <img src={`${import.meta.env.BASE_URL}assets/property.jpg`} alt="" style={css('width:440px;height:172px;display:block;object-fit:cover;')} />
+          <img src={`${import.meta.env.BASE_URL}assets/property.jpg`} alt="" style={css('width:100%;height:172px;display:block;object-fit:cover;')} />
         </div>
         <div style={css('position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.22),rgba(0,0,0,0) 38%,rgba(251,251,253,0) 64%,#FBFBFD);pointer-events:none;')} />
         <div onClick={actions.backHome} style={css('position:absolute;top:54px;left:18px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.14);')}>
